@@ -2,9 +2,9 @@
  (name argon2)
  (public_name argon2)
  (libraries ctypes)
- ;(flags
- ; :standard
- ; (:include flags.sexp))
+ (flags
+  :standard
+  (:include flags.sexp))
  (synopsis "OCaml bindings to argon2")
  (ctypes
   (external_library_name libargon2)
