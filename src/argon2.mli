@@ -46,7 +46,6 @@ end
 
 module type HashFunctions = sig
   type hash
-
   type encoded
 
   val hash_raw :
@@ -56,7 +55,7 @@ module type HashFunctions = sig
     pwd:string ->
     salt:string ->
     hash_len:int ->
-    (hash, ErrorCodes.t) Result.result
+    (hash, ErrorCodes.t) result
   (** Hashes a password, producing a raw hash. *)
 
   val hash_encoded :
@@ -67,11 +66,10 @@ module type HashFunctions = sig
     salt:string ->
     hash_len:int ->
     encoded_len:int ->
-    (encoded, ErrorCodes.t) Result.result
+    (encoded, ErrorCodes.t) result
   (** Hashes a password, producing an encoded hash. *)
 
-  val verify :
-    encoded:encoded -> pwd:string -> (bool, ErrorCodes.t) Result.result
+  val verify : encoded:encoded -> pwd:string -> (bool, ErrorCodes.t) result
   (** Verifies a password against an encoded string. *)
 
   val hash_to_string : hash -> string
@@ -81,19 +79,17 @@ module type HashFunctions = sig
   (** Converts an encoded hash to a string. *)
 end
 
-(** Bindings to Argon2i. *)
 module I : HashFunctions
+(** Bindings to Argon2i. *)
 
-(** Bindings to Argon2d. *)
 module D : HashFunctions
+(** Bindings to Argon2d. *)
 
-(** Bindings to Argon2id. *)
 module ID : HashFunctions
+(** Bindings to Argon2id. *)
 
 type hash = string
-
 type encoded = string
-
 type kind = D | I | ID
 
 val show_kind : [ `Upper | `Lower ] -> kind -> string
@@ -113,14 +109,11 @@ val hash :
   hash_len:int ->
   encoded_len:int ->
   version:version ->
-  (hash * encoded, ErrorCodes.t) Result.result
+  (hash * encoded, ErrorCodes.t) result
 (** Generic function underlying the above ones. *)
 
 val verify :
-  encoded:encoded ->
-  pwd:string ->
-  kind:kind ->
-  (bool, ErrorCodes.t) Result.result
+  encoded:encoded -> pwd:string -> kind:kind -> (bool, ErrorCodes.t) result
 (** Verifies a password against an encoded string. *)
 
 val encoded_len :

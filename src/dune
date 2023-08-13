@@ -1,11 +1,24 @@
 (library
  (name argon2)
  (public_name argon2)
- (libraries result ctypes.foreign ctypes)
- (flags
-  :standard
-  (:include flags.sexp))
- (synopsis "OCaml bindings to argon2"))
+ (libraries ctypes)
+ ;(flags
+ ; :standard
+ ; (:include flags.sexp))
+ (synopsis "OCaml bindings to argon2")
+ (ctypes
+  (external_library_name libargon2)
+  (build_flags_resolver pkg_config)
+  (headers (include "argon2.h"))
+  (type_description
+   (instance Type)
+   (functor Type_description))
+  (function_description
+   (concurrency unlocked)
+   (instance Function)
+   (functor Function_description))
+  (generated_types Types_generated)
+  (generated_entry_point C)))
 
 (rule
  (targets flags.sexp)

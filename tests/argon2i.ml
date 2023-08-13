@@ -2,17 +2,11 @@ open Argon2
 open Printf
 
 let hash_len = 32
-
 let t_cost = 2
-
 let m_cost = 65536
-
 let parallelism = 1
-
 let salt = "0000000000000000"
-
-let salt_len = String.length salt
-
+let _salt_len = String.length salt
 let pwd = "password"
 
 let hash_raw () =
